@@ -1,0 +1,61 @@
+#tariffsForAddress{
+    font-size: 20px;
+    /*width: 1200px;*/
+    margin-top: 50px;
+}
+#tariffsForAddress .table{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 3px;
+    border-bottom: none;
+}
+#tariffsForAddress .row{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+}
+#tariffsForAddress .cell{
+    width: 300px;
+    height: 80px;
+    display: flex;
+    box-sizing: border-box;    
+}
+#tariffsForAddress .columnProvider{
+    width: 180px;
+}
+#tariffsForAddress .cell img{
+    width: 150px;
+    margin: auto;
+}
+#tariffsForAddress .cell p{
+    margin: auto;
+    display: inline;
+}
+#tariffsForAddress .cell button{
+    margin: auto;
+}
+#tariffsForAddress .cell:not(.columnPrice){
+    border-right: 1px solid black;
+}
+#tariffsForAddress button{
+    outline: none;
+    cursor: pointer;  
+    border: 1px solid black;  
+    border-radius: 2px;
+}
+#tariffsForAddress button:hover{
+    background-color: rgb(216, 216, 216);
+}
+#tariffsForAddress #row0 button{
+    border: none;
+    width: 100%;
+    height: 100%; 
+}
+#tariffsForAddress .columnPrice button:{
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+#tariffsForAddress .row .columnPrice button:hover{
+    border: 1px solid black;
+}

@@ -1,0 +1,22 @@
+.requestCard{
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 5px 0 5px 5px;
+    justify-content: space-between;
+    display: flex;
+}
+.requestCard ul{
+    list-style-type: none;
+    margin: 0;
+}
+.requestCard>div{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+.requestCard>div>button:last-child{
+    margin-left: 5px;
+}

@@ -3,8 +3,6 @@ import  React,  { useEffect, useState/*, useRef*/ } from 'react';
 import './AddressFinder.css'
 
 export const AddressFinder = (props) => {
-    //наговнокожено 
-    //можно обойтись и без такого количества состояний, но руки не дошли
     const [addresses, setAddresses] = useState({
         streetsAndHouses: [],
         streets: []

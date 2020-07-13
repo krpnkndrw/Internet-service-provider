@@ -4,18 +4,17 @@ import './TariffsTable.css'
 
 export const TariffsTable = (props) => {
 
-    const [tariffs, setTariffs] = useState(props.listOfTariffs)
+    const [tariffs, setTariffs] = useState(props.allTariffs)
 
     useEffect( () => {
-        let newTariffs = props.listOfTariffs.filter( element => {
+        let newTariffs = props.allTariffs.filter( element => {
             return props.dataForRequest.house['Провайдер'].includes( element['Провайдер'] )
         })
         setTariffs(newTariffs) 
-        console.log('фильтр тарифов')
-    }, [props.dataForRequest.house, props.listOfTariffs] )
+    }, [props.dataForRequest.house, props.allTariffs] )
     
 
-    useEffect( () => {
+    /*useEffect( () => {
         //Почему-то требуется задержка хотя пустой юсЕфект должен работать сразу
         setTimeout( () => {
             window.scrollTo({
@@ -23,12 +22,12 @@ export const TariffsTable = (props) => {
                 behavior:"smooth"
             })
         }, 100 )
-    }, [])
+    }, [])*/
 
     return( 
         <div>
             <TableOfTariffs 
-                listOfTariffs={tariffs}
+                allTariffs={tariffs}
                 setDataForRequest={props.setDataForRequest} 
                 dataForRequest={props.dataForRequest} 
             />

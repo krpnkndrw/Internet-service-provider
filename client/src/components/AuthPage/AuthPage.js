@@ -13,7 +13,7 @@ export const AuthPage = () => {
     }
 
     const registerHandler = async() => {
-        const response = await fetch('/api/auth/register', {
+        /*const response = */await fetch('/api/auth/register', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

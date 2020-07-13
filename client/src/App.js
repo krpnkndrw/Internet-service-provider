@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { /*useCallback,*/ useState, useEffect } from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 import { Header } from './components/Header/Header'
@@ -23,7 +23,6 @@ function App() {
 
   useEffect( () => {
     const user = JSON.parse(localStorage.getItem('User'))
-
         if(user && user.token) {
             login(user.token, user.userId)
         }
@@ -57,15 +56,13 @@ function App() {
 /*
 todo
 
+В инпуте долэно появляться ул. +7 и тд
+
 Направления сортировки для каждого столбца
 Убрать логику логина из апп
 Убрать запросы из мэйна
-Кнопки выбора тарифа в таблице всех тарифов
-Поднять состояния до main
 Обработка ошибок
 Обработка ожидания загрузки
-Исправить говнокод(слишком много лишних состояний и функций)
-Автокомплит иногда багует и не показывает
 Комментарии к коду
 Большще свойств тарифа (дополнительные опции и тд)
 Фильтры таблицы
@@ -73,7 +70,7 @@ todo
 Маска для номера
 
 Шрифт
-Изменить скролы в автокомплитах
+Изменить скролы в хинтах
 
 Анимация построчного добалениея таблицы
 Анимайия на кнопки

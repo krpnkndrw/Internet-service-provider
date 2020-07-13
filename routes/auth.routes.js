@@ -14,8 +14,7 @@ router.post('/register', async(req, res) => {
         if (candidate) {
             return res.status(400).json({ message: 'Такой пользователь уже существует' })
         }
-
-
+        
         const hashedPassword = await bcrypt.hash(password, 12)
         const user = new User({ login: login, password: hashedPassword })
 

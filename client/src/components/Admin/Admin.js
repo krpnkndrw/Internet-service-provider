@@ -1,15 +1,15 @@
-import React, { useState, useContext } from 'react'
-import { AuthContext } from '../../context/AuthContext'
+import React/*, { useState, useContext }*/ from 'react'
+//import { AuthContext } from '../../context/AuthContext'
 import { CloseRequests } from '../CloseRequests/CloseRequests'
 import { OpenRequests } from '../OpenRequests/OpenRequests'
 import './Admin.css'
 import {
-    BrowserRouter as Router,
+    //BrowserRouter as Router,
     Switch,
     Route,
     Link,
     useRouteMatch,
-    useParams
+    //useParams
   } from "react-router-dom";
 
 export const Admin = () => {

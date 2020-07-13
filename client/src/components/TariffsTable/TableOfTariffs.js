@@ -3,46 +3,47 @@ import './TariffsTable.css'
 
 export const TableOfTariffs = (props) => {
 
-    const [listOfTariffs, setListOfTariffs] = useState(props.listOfTariffs)
+    const [allTariffs, setAllTariffs] = useState(props.allTariffs)
     const [sort, setSort] = useState({
         direction: 1
     })
 
     useEffect( () => {
-        setListOfTariffs(props.listOfTariffs)
-    }, [props.listOfTariffs])
+        setAllTariffs(props.allTariffs)
+    }, [props.allTariffs])
 
     //Создание таблицы
     const createTable = () => { 
-        return listOfTariffs.map( (element, index) =>
+        return allTariffs.map( (element, index) =>
             <div key={element._id} id={`row${index + 1}`} className='row'>
                 <div className='cell columnProvider'>{chooseProviderLogo(element['Провайдер'])}</div>
                 <div className='cell columnName'><p>{element['Название']}</p></div>
                 <div className='cell columnSpeed'><p>{element['Скорость']}</p></div>
-                <div className='cell columnPrice'><p>{element['Цена']}</p> <button onClick={() => {
-                    console.log(props.dataForRequest)
-                    props.setDataForRequest({
-                        ...props.dataForRequest,
-                        tariff: element
-                    })
-                }}>Выбрать</button></div>
+                <div className='cell columnPrice'><p>{element['Цена']}</p> 
+                    {props.showButton && <button onClick={
+                        () => {
+                            props.setDataForRequest({
+                                ...props.dataForRequest,
+                                tariff: element
+                            })
+                        }}>Выбрать
+                    </button>}
+                </div>
             </div>
         )  
     }
 
-    
-
     //Подстановка логотипа провайдера
     const chooseProviderLogo = (provider) => {
-        if(provider === 'ДОМ.ru')       return <img src='http://localhost:3000/static/DOMru2.png' alt={provider}></img>
-        if(provider === 'Beeline')      return <img src='http://localhost:3000/static/Beeline.png' alt={provider}></img>
-        if(provider === 'МТС')          return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
-        if(provider === 'Ростелеком')   return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
+        if(provider === 'ДОМ.ru') return <img src='http://localhost:3000/static/DOMru2.png' alt={provider}></img>
+        if(provider === 'Beeline') return <img src='http://localhost:3000/static/Beeline.png' alt={provider}></img>
+        if(provider === 'МТС') return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
+        if(provider === 'Ростелеком') return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
     }
     
     //Сортировка столбцов
     const sortingByСolumn = (column) => {
-        const newTariffs = listOfTariffs.sort( (a, b) => {
+        const newTariffs = allTariffs.sort( (a, b) => {
             if(column === 'Скорость' || column === 'Цена'){
                 a = +a[column].split(' ')[0]
                 b = +b[column].split(' ')[0]
@@ -56,14 +57,14 @@ export const TableOfTariffs = (props) => {
             if (a < b) {
                 return 1 * sort.direction
             }
-            if(a === b){
+            //if(a === b){
                 return 0
-            }   
+            //}   
         }) 
         setSort({
             direction: sort.direction*(-1)
         })
-        setListOfTariffs(newTariffs)
+        setAllTariffs(newTariffs)
         //createTable()
     }
 

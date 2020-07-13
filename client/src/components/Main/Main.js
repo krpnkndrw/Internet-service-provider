@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import {/*BrowserRouter as Router,*/ Switch, Route/*, Redirect*/} from 'react-router-dom'
 import './Main.css'
 import { InternetConnectionRequest } from '../InternetConnectionRequest/InternetConnectionRequest'
 //import { AllTariffs } from '../AllTariffs/AllTariffs'
@@ -8,55 +8,117 @@ import { Admin } from '../Admin/Admin'
 //import { AuthContext } from '../../context/AuthContext'
 import { PrivateRoute } from '../../PrivateRoute/PrivateRoute'
 import { PublicRoute } from '../../PrivateRoute/PublicRoute'
-import { TariffsTable } from '../TariffsTable/TariffsTable'
+//import { TariffsTable } from '../TariffsTable/TariffsTable'
 import { TableOfTariffs } from '../TariffsTable/TableOfTariffs'
 
  
 export const Main = () => {
     //const auth = useContext(AuthContext)
-    const [listOfAddresses, setListOfAddresses] = useState([])
-    const [listOfTariffs, setListOfTariffs] = useState([])
+    const [listOfAllAddresses, setListOfAllAddresses] = useState([])
+    const [allTariffs, setAllTariffs] = useState([])
 
     useEffect( () => {
-        const loadListOfAddreses = async() => {
-            const response = await fetch('/api/database/listOfAddresses', {
+        const loadListOfAllAddreses = async() => {
+            const response = await fetch('/api/database/listOfAllAddresses', {
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json'
                 },
             });
-            const [listOfAddresses] = await response.json()          
-            setListOfAddresses(listOfAddresses.list)
+            const [listOfAllAddresses] = await response.json()          
+            setListOfAllAddresses(listOfAllAddresses.list)
         }
-        loadListOfAddreses()
-    }, [] )
-    useEffect( () => {
-        const loadListOfTariffs= async() => {
+        const loadAllTariffs= async() => {
             const response = await fetch('/api/database/tariffs', {
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json'
                 },
             });
-            const allTariffs = await response.json()            
-            setListOfTariffs(allTariffs)
+            const newAllTariffs = await response.json()            
+            setAllTariffs(newAllTariffs)
         }
-        loadListOfTariffs() 
-    }, [] ) 
+        loadListOfAllAddreses()
+        loadAllTariffs() 
+    }, [] )
+
+
     //useEffect( () => {console.log(listOfTariffs)}, [listOfTariffs])
+
+    const dataForRequestInit = {
+        house: '',
+        tariff: '',
+        phone: '',
+        email: '',
+        name: '',
+        done: false
+    }
+    const [dataForRequest, setDataForRequest] = useState(dataForRequestInit) 
+    const [successModalShow, setSuccessModalShow] = useState(false)
+
+    const requestSend = async() => {
+        setSuccessModalShow(true)
+        setDataForRequest(dataForRequestInit)
+        console.log(dataForRequest)
+        /*const response = await */fetch('/api/database/newinternetrequest', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataForRequest),
+        })
+        setHouseInput('')
+        setStreetInput('')
+        setAddressFinderCondition('waitingOfStreet')
+    }  
+/////////
+    const [houseInput, setHouseInput] = useState('')
+    const [streetInput, setStreetInput] = useState('')
+    const [addressFinderCondition, setAddressFinderCondition] = useState('waitingOfStreet')
+    const submitHandler = () => {
+        const fullInfOfHouse = async() => {
+             const response = await fetch('/api/database/houseinfo', {
+                method: 'POST',
+                body: JSON.stringify({address: `Омск, ${streetInput}, ${houseInput}`}),
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            const [houseInfo] = await response.json()
+            setDataForRequest({
+                ...dataForRequest,
+                house: houseInfo,
+                tariff: ''
+            })  
+        }
+        fullInfOfHouse()
+    }
 
     return(
         <main>
             <Switch>
                  <Route path='/' exact>
                     <InternetConnectionRequest 
-                        listOfAddresses={listOfAddresses} 
-                        listOfTariffs={listOfTariffs}
+                        listOfAllAddresses={listOfAllAddresses} 
+                        dataForRequest={dataForRequest}
+                        setDataForRequest={setDataForRequest}
+                        houseInput={houseInput} 
+                        setHouseInput={setHouseInput}
+                        streetInput={streetInput}
+                        setStreetInput={setStreetInput}
+                        addressFinderCondition={addressFinderCondition}
+                        setAddressFinderCondition={setAddressFinderCondition}
+                        submitHandler={submitHandler}
+                        allTariffs={allTariffs}                                                
+                        requestSend={requestSend}                        
+                        setSuccessModalShow={setSuccessModalShow}
+                        successModalShow={successModalShow}
                     />
                 </Route>
                 <Route path='/tariffs' exact>
                     <TableOfTariffs 
-                        listOfTariffs={listOfTariffs}
+                        allTariffs={allTariffs}
+                        showButton={false}
                     />
                 </Route>
                 <PrivateRoute path='/admin' component={Admin} to='/login'/>

@@ -1,30 +1,50 @@
-import  React, {useEffect} from 'react';
+import  React/*, {useEffect}*/ from 'react';
 import './RequestForm.css'
 
 export const RequestForm = (props) => {
    
-    const inputHandler = (event) => {
-        console.log(props.dataForRequest)
+    const inputHandler = (event) => {        
         props.setDataForRequest({
             ...props.dataForRequest,
             [event.target.name]: event.target.value
         })
     }
 
-    useEffect( () => {
+    /*useEffect( () => {
         setTimeout( () => {
             window.scrollTo({
                 top: document.getElementById('requestForm').offsetTop,
                 behavior:"smooth"
             })
         }, 75)  
-    }, [props.dataForRequest])
+    }, [props.dataForRequest])*/
 
     const submitFormHandler = (event) => {
         event.preventDefault()
         props.requestSend()
     }
 
+    const phoneMask = () => {
+        const phone = props.dataForRequest.phone
+        return props.dataForRequest.phone
+    }
+//  +7(929)620-70-20
+    const inputPhoneHandler = (event) => {
+        const value = event.target.value        
+        props.setDataForRequest({
+            ...props.dataForRequest,
+            phone: value.slice(2)
+        })
+    }
+    const inputClickHandler = () => {
+        if(props.dataForRequest.phone.length === 0){
+            props.setDataForRequest({
+                ...props.dataForRequest,
+                phone: `+7`
+            })
+        }
+    }
+    
     return(
         <div id='requestForm'>
             <h2>Осталось только ввести контактные данные</h2>
@@ -39,7 +59,8 @@ export const RequestForm = (props) => {
                         required                    
                     />
                     <input 
-                        type="number"
+                        //type="number"
+                        maxLength="16"
                         name="phone"
                         placeholder="Телефон"
                         value={props.dataForRequest.phone} 

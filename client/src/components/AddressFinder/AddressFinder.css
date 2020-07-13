@@ -68,3 +68,9 @@
     background-color: #ccc;
     cursor: pointer;
 }
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}

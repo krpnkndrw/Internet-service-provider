@@ -24,7 +24,7 @@ router.post('/newinternetrequest', (req, res) => {
 })
 
 // /api/database/listOfAddresses
-router.get('/listOfAddresses', async(req, res) => {
+router.get('/listOfAllAddresses', async(req, res) => {
     const listOfAddresses = await ListOfAddresses.find({})
     res.send(listOfAddresses)
 })

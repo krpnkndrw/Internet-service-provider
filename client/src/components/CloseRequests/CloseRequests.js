@@ -21,7 +21,7 @@ export const CloseRequests = () => {
     }, [] )
 
     const doneRequestHandle = async(id) => {
-        const response = await fetch('/api/database/updaterequest', {
+        /*const response = */await fetch('/api/database/updaterequest', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const CloseRequests = () => {
         loadListOfAddreses()
     }
     const deleteRequestHandle = async(id) => {
-        const response = await fetch('/api/database/deleterequest', {
+        /*const response = */await fetch('/api/database/deleterequest', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

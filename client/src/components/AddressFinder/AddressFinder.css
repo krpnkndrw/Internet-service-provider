@@ -1,72 +1,180 @@
 #addressFinder{
-    margin-top: 100px;
-    display: flex;
-    justify-content: space-between;
-    width: 1000px;
-    position: relative;
-}
-#streetInput{
-    width: 580px;
-    height: 50px;
-    box-sizing: border-box;
-    padding-left: 15px;
-    font-size: 20px;
-    outline: none;
-}
-#addressFinder button{
-    font-size: 20px;
-    cursor: pointer;
-    outline: none;
-}
-#houseButton{
-    width: 150px;
-    height: 50px;
-}
-#submitButton{
-    width: 220px;
-    height: 50px;
-}
-#addressFinder ul{
-    position: absolute;
-    list-style-type: none;
-    max-height: 300px;
-    overflow-y: scroll;
-    padding: 0;
-    margin: 0;
-    border: 1px solid black;
-    top: 49px;
-}
-.ulhidden{
-    display: none;
-}
-#addressFinder ul button{
-    background-color: #fff;
-    border: none;    
-    height: 50px;
-    padding: 0;
-}
-#street ul{
-    width: 578px;
-}
-#street ul button{
-    width: 561px;
-}
-.hideDiv{
-    position: absolute;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
+    background-color: blue;
+    position: relative;
+    color: #fff;
+    transition: 1s;
+}
+#addressFinderBackgroundVideo {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    position: absolute;
     top: 0;
     left: 0;
+  }
+#addressFinderContent{
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
-#house ul{
-    width: 148px;
+#addressFinderH1{
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 870px;
+    transition: 0.5s;
+} 
+#addressFinder nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;  
+    height: 100px;
+    line-height: 100px;
+    padding: 0 50px 0 50px;
+    box-sizing: border-box;
 }
-#house ul button{
-    width: 131px;
+#addressFinder nav *{
+    display: inline;
 }
-#addressFinder ul button:hover{
-    background-color: #ccc;
+#addressFinder nav div{
+    float: right;
+}
+#addressFinder nav div button{
+    margin-left: 25px;
+    background: none;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: underline;
+}
+#addressFinder nav div button:hover{
+    text-decoration: none;
+}
+#addressFinder nav div button:first-child{
+    margin-left: 0px;
+}
+#addressFinder nav h2{
+    float: left;
+    margin:0;
+}
+#streetHouseSubmitContainer{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 1s;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1300px;
+}
+#streetHouseSubmitContainer * {
+    font-size: 20px;
+}
+#streetInput{
+    width: 620px;
+    height: 60px;
+    outline: none;
+    padding-left: 20px;
+    box-sizing: border-box;
+    transition: width 1s, height 1s;
+}
+#house>button{
+    width: 200px;
+    height: 60px;
+    outline: none;
+    background-color: #fff;
+    transition: width 1s, height 1s;
+}
+#submitButton{
+    width: 330px;
+    height: 60px;
+    outline: none;
+    background-color: #DB2A2A;
+    color: #fff;
+    transition: width 1s, height 1s;
+}
+#submitButton:disabled{
+    background-color: #6d1616;
+}
+button{
+    outline: none;
+    border: none;
     cursor: pointer;
+}
+#streetHintsList{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    height: 300px;
+    overflow: overlay;
+}
+#streetHintsList button{
+    width: 620px;
+    padding: 0;
+    height: 40px;
+    background-color: #fff;
+}
+#streetHintsList button:hover{
+    background-color: #DB2A2A;
+    color: #fff;
+}
+#houseHintsList{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    height: 300px;
+    overflow: overlay;
+}
+#houseHintsList button{
+    width: 200px;
+    padding: 0;
+    height: 40px;
+    background-color: #fff;
+}
+#houseHintsList button:hover{
+    background-color: #DB2A2A;
+    color: #fff;
+}
+/*************/
+#addressFinder.minimalize{ 
+    height: 10vh !important;
+    position: relative !important;
+}
+.disappearance{
+    opacity: 0 !important;
+}
+#streetInput.minimalize{
+    width: 320px !important;
+    height: 40px !important;
+}
+#streetHintsList button.minimalize{
+    width: 320px !important;
+    height: 40px !important;
+}
+#houseButton.minimalize{
+    width: 100px !important;
+    height: 40px !important;
+}
+#houseHintsList button.minimalize{
+    width: 100px !important;
+    height: 40px !important;
+}
+#submitButton.minimalize{
+    width: 200px !important;
+    height: 40px !important;
+}
+#streetHouseSubmitContainer.minimalize{
+    left: 5% !important;
+    transform: translate(0, -50%) !important;
+    max-width: 680px !important;
 }
 .show{
     display: block;
@@ -74,3 +182,4 @@
 .hide{
     display: none;
 }
+/*************/

@@ -75,6 +75,7 @@ export const Main = () => {
     const [houseInput, setHouseInput] = useState('')
     const [streetInput, setStreetInput] = useState('')
     const [addressFinderCondition, setAddressFinderCondition] = useState('waitingOfStreet')
+
     const submitHandler = () => {
         const fullInfOfHouse = async() => {
              const response = await fetch('/api/database/houseinfo', {
@@ -92,6 +93,18 @@ export const Main = () => {
             })  
         }
         fullInfOfHouse()
+        const addressFinderH1 = document.querySelector("#addressFinderH1")
+        const addressFinderTitle = document.querySelector("#addressFinderTitle")
+
+        const streetHintsButtons = document.querySelectorAll(".streetHintsListButton")
+        console.log(streetHintsButtons)
+        
+        addressFinderH1.classList.add('disappearance')
+        addressFinderTitle.classList.add('disappearance')
+
+       /* for(let btn of streetHintsButtons){
+            btn.classList.toggle('minimalizeStreetInput')
+        }*/
     }
 
     return(
@@ -112,7 +125,7 @@ export const Main = () => {
                         allTariffs={allTariffs}                                                
                         requestSend={requestSend}                        
                         setSuccessModalShow={setSuccessModalShow}
-                        successModalShow={successModalShow}
+                        successModalShow={successModalShow}                        
                     />
                 </Route>
                 <Route path='/tariffs' exact>

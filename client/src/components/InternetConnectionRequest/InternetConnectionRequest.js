@@ -8,18 +8,17 @@ import './InternetConnectionRequest.css'
 
 export const InternetConnectionRequest = (props) => {
     return( 
-        <div id='internetConnectionRequest'>
-            <h1>Введите адрес и мы подберем вам подходящий тариф</h1>
+        <div id='internetConnectionRequest'>            
             <AddressFinder 
                 listOfAllAddresses={props.listOfAllAddresses}
                 dataForRequest={props.dataForRequest}
-                setDataForRequest={props.setDataForRequest} 
+                setDataForRequest={props.setDataForRequest}
                 houseInput={props.houseInput}
-                setHouseInput={props.setHouseInput} 
-                streetInput={props.streetInput}               
-                setStreetInput={props.setStreetInput} 
-                addressFinderCondition={props.addressFinderCondition}                
-                setAddressFinderCondition={props.setAddressFinderCondition}                
+                setHouseInput={props.setHouseInput}
+                streetInput={props.streetInput}
+                setStreetInput={props.setStreetInput}
+                addressFinderCondition={props.addressFinderCondition}
+                setAddressFinderCondition={props.setAddressFinderCondition}
                 submitHandler={props.submitHandler}
             />
             {(props.dataForRequest.house.length !== 0) &&

@@ -36,7 +36,7 @@ function App() {
     }else {
       localStorage.removeItem('User')
     }
-  }, [token, userId])  
+  }, [token, userId])
 
 
   return(
@@ -44,20 +44,20 @@ function App() {
       token, userId, login, logout, isAuthenticated
     }}>
       <div className="App">
-        <Router> 
-          <Header />          
+        <Router>
+          {/*<Header />*/}
           <Main />
-          <Footer />
-        </Router>   
+          {/*<Footer />*/}
+        </Router>
       </div>
     </AuthContext.Provider>
-    )  
+  )
 }
 /*
 todo
 
-В инпуте долэно появляться ул. +7 и тд
-
+НОВЫЙ ДИЗАЙН
+В инпуте должно появляться ул. +7 и тд
 Направления сортировки для каждого столбца
 Убрать логику логина из апп
 Убрать запросы из мэйна

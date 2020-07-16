@@ -1,0 +1,21 @@
+#TariffCards{
+    margin-top: 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+#TariffCards h2{ 
+    margin: 40px 0 0 0 ;
+    font-weight: 400;
+    font-size: 50px;
+}
+@keyframes appereance {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

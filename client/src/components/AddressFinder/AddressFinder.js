@@ -1,4 +1,5 @@
 import  React, { useEffect, useState } from 'react';
+import { StreetHouseSubmitContainer } from './StreetHouseSubmitContainer'
 import './AddressFinder.css'
 
 export const AddressFinder = (props) => {
@@ -73,54 +74,40 @@ export const AddressFinder = (props) => {
         setAddressSelected(true)
     }
     return(
-        <div id='addressFinder' className={addressSelected ? 'minimalize': undefined}>
-            <video autoPlay muted loop id="addressFinderBackgroundVideo">
-                <source src='http://localhost:3000/static/server.mp4' type="video/mp4" />
-            </video>
+        <React.Fragment>
+        <div id='addressFinderFiller' className={addressSelected ? 'minimalize': undefined}></div>
+        <div id='addressFinder' className={addressSelected ? 'minimalize toFixed': undefined}>            
+            <div id='addressFinderBackground'>
+                <video autoPlay muted loop id="addressFinderBackgroundVideo">
+                    <source src='http://localhost:3000/static/office_1.webm' type="video/mp4" />
+                </video>
+                <div id='addressFinderBackgroundFilter'></div>
+            </div>            
             <div id='addressFinderContent'>                
                 <nav>
-                    <h2 id='addressFinderTitle'>Подключение интернета в Омске</h2>
+                    <h2 id='addressFinderTitle' className={addressSelected ? 'disappearance': undefined}
+                        >Подключение интернета в Омске</h2>
                     <div>
                         <button>Все тарифы</button>
                         <button>Логин</button>
                     </div>                  
                 </nav>
-                <h1 id='addressFinderH1'>Введите адрес и мы подберем вам подходящий тариф</h1>
-                <div id='streetHouseSubmitContainer' className={addressSelected ? 'minimalize': undefined}>
-                    <div id='street'>
-                        <input
-                            id='streetInput'
-                            className={addressSelected ? 'minimalize': undefined}
-                            name='street'
-                            type='text'
-                            placeholder="Введите улицу"
-                            autoComplete="off"
-                            value={props.streetInput}
-                            onChange={inputHandler}
-                        /> 
-                        {streetInputHints()}
-                    </div>           
-                    <div id='house'> 
-                        <button
-                            id='houseButton'
-                            className={addressSelected ? 'minimalize': undefined}
-                            disabled={props.addressFinderCondition === 'waitingOfStreet'}
-                            /*onClick={() => setAddressSelected(false)}*/
-                        >
-                            {(props.addressFinderCondition === 'waitingOfSubmit')?props.houseInput:'Дом'}
-                        </button>
-                        {houseButtonHints()}
-                    </div>
-                    <button
-                        id='submitButton'
-                        className={addressSelected ? 'minimalize': undefined}
-                        onClick={submitHandler}
-                        disabled={props.addressFinderCondition !== 'waitingOfSubmit'}
-                    >
-                        Подобрать тарифы
-                    </button>
-                </div>                
+                <h1 id='addressFinderH1' className={addressSelected ? 'disappearance': undefined}>
+                    <p>Введите адрес</p>
+                    <p>и мы подберем вам подходящий тариф</p>
+                </h1>
+                <StreetHouseSubmitContainer 
+                    addressSelected={addressSelected}
+                    inputHandler={inputHandler}
+                    streetInputHints={streetInputHints}
+                    houseButtonHints={houseButtonHints}
+                    submitHandler={submitHandler}
+                    streetInput={props.streetInput}
+                    addressFinderCondition={props.addressFinderCondition}
+                    houseInput={props.houseInput}
+                />
             </div>            
         </div>
+        </React.Fragment>
     )
 }

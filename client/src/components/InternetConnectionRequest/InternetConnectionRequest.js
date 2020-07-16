@@ -1,9 +1,10 @@
-import  React, { /*useState,, useEffect*/} from 'react';
-import { AddressFinder } from '../AddressFinder/AddressFinder';
+import  React, { /*useState,, useEffect*/} from 'react'
+import { AddressFinder } from '../AddressFinder/AddressFinder'
 import { TariffsTable } from '../TariffsTable/TariffsTable'
 import { TableOfTariffs } from '../TariffsTable/TableOfTariffs'
-import { RequestForm } from '../RequestForm/RequestForm';
-import { SuccessModalWindow } from '../SuccessModalWindow/SuccessModalWindow';
+import { RequestForm } from '../RequestForm/RequestForm'
+import { SuccessModalWindow } from '../SuccessModalWindow/SuccessModalWindow'
+import { TariffCards } from '../TariffCards/TariffCards'
 import './InternetConnectionRequest.css'
 
 export const InternetConnectionRequest = (props) => {
@@ -22,15 +23,14 @@ export const InternetConnectionRequest = (props) => {
                 submitHandler={props.submitHandler}
             />
             {(props.dataForRequest.house.length !== 0) &&
-                <TableOfTariffs
-                    allTariffs={ () => {
-                        return props.allTariffs.filter( element => {
+                <TariffCards
+                    allTariffs={ props.allTariffs.filter( element => {
                             return props.dataForRequest.house['Провайдер'].includes( element['Провайдер'] )
                         })
-                    }}
-                    dataForRequest={props.dataForRequest}
+                    }
+                   /* dataForRequest={props.dataForRequest}
                     setDataForRequest={props.setDataForRequest}
-                    showButton={true}                                 
+                    showButton={true}    */                             
                 />
             }
             {(props.dataForRequest.tariff.length !== 0) &&

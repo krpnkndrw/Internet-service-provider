@@ -15,7 +15,9 @@ import { TableOfTariffs } from '../TariffsTable/TableOfTariffs'
 export const Main = () => {
     //const auth = useContext(AuthContext)
     const [listOfAllAddresses, setListOfAllAddresses] = useState([])
-    const [allTariffs, setAllTariffs] = useState([])
+    const [allTariffs, setAllTariffs] = useState([{
+        'Провайдер': '' 
+    }])
 
     useEffect( () => {
         const loadListOfAllAddreses = async() => {
@@ -93,18 +95,6 @@ export const Main = () => {
             })  
         }
         fullInfOfHouse()
-        const addressFinderH1 = document.querySelector("#addressFinderH1")
-        const addressFinderTitle = document.querySelector("#addressFinderTitle")
-
-        const streetHintsButtons = document.querySelectorAll(".streetHintsListButton")
-        console.log(streetHintsButtons)
-        
-        addressFinderH1.classList.add('disappearance')
-        addressFinderTitle.classList.add('disappearance')
-
-       /* for(let btn of streetHintsButtons){
-            btn.classList.toggle('minimalizeStreetInput')
-        }*/
     }
 
     return(

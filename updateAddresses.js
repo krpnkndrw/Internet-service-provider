@@ -40,7 +40,7 @@ const updateAddresses = () => {
                 ...element,
                 'Провайдер': providers
             }            
-    })    
+    })
     //Обновление данных в бд
     deleteAll(House)
     allAddresesяUniqueWithProviders.forEach( element => House(element).save() )

@@ -1,13 +1,11 @@
 import React, { /*useCallback,*/ useState, useEffect } from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
-import { Header } from './components/Header/Header'
-import { Main } from './components/Main/Main'
-import { Footer } from './components/Footer/Footer'
 import { AuthContext } from './context/AuthContext'
+import { Routes } from './Routes'
 
 function App() {
-
+////////////////////////AUTH////////////////////////////
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
   const isAuthenticated = !!token
@@ -37,7 +35,90 @@ function App() {
       localStorage.removeItem('User')
     }
   }, [token, userId])
+////////////////////////SEND_REQUEST////////////////////////////
+  const dataForRequestInit = {
+    house: '',
+    tariff: '',
+    phone: '',
+    email: '',
+    name: '',
+    done: false
+}
+const [dataForRequest, setDataForRequest] = useState(dataForRequestInit) 
+//const [successModalShow, setSuccessModalShow] = useState(false)
 
+// const requestSend = async() => {
+//     setSuccessModalShow(true)
+//     setDataForRequest(dataForRequestInit)
+//     console.log(dataForRequest)
+//     /*const response = await */fetch('/api/database/newinternetrequest', {
+//         method: 'POST',
+//         headers: {
+//         'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(dataForRequest),
+//     })
+//     setHouseInput('')
+//     setStreetInput('')
+//     setAddressFinderCondition('waitingOfStreet')
+// } 
+////////////////////////STATE////////////////////////////
+    const [listOfAllAddresses, setListOfAllAddresses] = useState([])
+    const [allTariffs, setAllTariffs] = useState([{
+        'Провайдер': '' 
+    }])
+
+    useEffect( () => {
+        const loadListOfAllAddreses = async() => {
+            const response = await fetch('/api/database/listOfAllAddresses', {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+            });
+            const [listOfAllAddresses] = await response.json()          
+            setListOfAllAddresses(listOfAllAddresses.list)
+        }
+        const loadAllTariffs= async() => {
+            const response = await fetch('/api/database/tariffs', {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+            });
+            const newAllTariffs = await response.json()            
+            setAllTariffs(newAllTariffs)
+        }
+        loadListOfAllAddreses()
+        loadAllTariffs() 
+    }, [] )
+
+    const [houseInput, setHouseInput] = useState('')
+    const [streetInput, setStreetInput] = useState('')
+    const [addressFinderCondition, setAddressFinderCondition] = useState('waitingOfStreet')
+
+    const submitHandler = () => {
+      console.log('submitHandler start')
+      const fullInfOfHouse = async() => {
+        const response = await fetch('/api/database/houseinfo', {
+          method: 'POST',
+          body: JSON.stringify({address: `Омск, ${streetInput}, ${houseInput}`}),
+          headers: {
+          'Content-Type': 'application/json'
+          }
+        })
+        console.log('submitHandler fetch')
+        const [houseInfo] = await response.json()
+        console.log('submitHandler response')
+        setDataForRequest({
+          ...dataForRequest,
+          house: houseInfo,
+          tariff: ''
+        })
+        console.log('submitHandler done')
+      }
+      fullInfOfHouse()
+  }
 
   return(
     <AuthContext.Provider value={{
@@ -45,9 +126,18 @@ function App() {
     }}>
       <div className="App">
         <Router>
-          {/*<Header />*/}
-          <Main />
-          {/*<Footer />*/}
+          <Routes 
+            listOfAllAddresses={listOfAllAddresses}
+            allTariffs={allTariffs}
+            houseInput={houseInput}
+            setHouseInput={setHouseInput}
+            streetInput={streetInput}
+            setStreetInput={setStreetInput}
+            addressFinderCondition={addressFinderCondition}
+            setAddressFinderCondition={setAddressFinderCondition}
+            submitHandler={submitHandler}
+            dataForRequest={dataForRequest}
+          />
         </Router>
       </div>
     </AuthContext.Provider>
@@ -56,7 +146,7 @@ function App() {
 /*
 todo
 
-НОВЫЙ ДИЗАЙН
+Анимация от скрола как 
 В инпуте должно появляться ул. +7 и тд
 Направления сортировки для каждого столбца
 Убрать логику логина из апп

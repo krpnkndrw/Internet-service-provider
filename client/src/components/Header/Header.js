@@ -10,29 +10,41 @@ export const Header = () => {
     }
     return(
         <header>
-            <h2>Подключение интернета в Омске</h2>
+            <div id='headerBackground'>
+                <video autoPlay muted loop>
+                    <source src='http://localhost:3000/static/office_1.webm' type="video/mp4"/>
+                </video>
+                <div></div>
+            </div>
             <nav>
+                <Link to='/'> 
+                    Подключение интернета в Омске
+                </Link>
                 <ul>
                     <li>
-                        <Link to='/'> 
-                            <button>Подбор тарифа</button> 
+                        <Link to='/availableTariffs'> 
+                            Подбор тарифа 
                         </Link>
                     </li>
                     <li>
-                        <Link to='/tariffs'> 
-                            <button>Все тарифы</button> 
+                        <Link to='/allTariffs'> 
+                            Все тарифы 
                         </Link>
                     </li>
                     <li>
                         <Link to='/admin'> 
-                            <button>Админ</button> 
+                            Админ 
                         </Link>
                     </li>
-                    {auth.isAuthenticated?<button
-                        onClick ={logoutHandler}
-                    >
-                        Выйти
-                    </button>:null} 
+                    <li>
+                        <Link to='/admin'> 
+                            Админ 
+                        </Link>
+                    </li>
+                    {auth.isAuthenticated
+                        ?<button onClick ={logoutHandler}>Выйти</button>
+                        :null
+                    } 
                 </ul>
             </nav>
         </header>

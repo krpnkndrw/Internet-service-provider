@@ -12,8 +12,8 @@ export const InternetConnectionRequest = (props) => {
         <div id='internetConnectionRequest'>            
             <AddressFinder 
                 listOfAllAddresses={props.listOfAllAddresses}
-                dataForRequest={props.dataForRequest}
-                setDataForRequest={props.setDataForRequest}
+                //dataForRequest={props.dataForRequest}
+                //setDataForRequest={props.setDataForRequest}
                 houseInput={props.houseInput}
                 setHouseInput={props.setHouseInput}
                 streetInput={props.streetInput}

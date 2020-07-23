@@ -1,0 +1,91 @@
+#titlePage{
+    width: 100%;
+    height: 100vh;
+    background-color: blue;
+    position: fixed;
+    top: 0;
+    color: #fff;
+    transition: 1s;
+    z-index: 1000;
+}
+#titlePageBackgroundVideo {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#titlePageBackgroundFilter{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #484848;
+    opacity: 0.2;
+}
+#titlePageContent{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#titlePageH1{
+    margin: 0;
+    position: absolute;
+    top: 32%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 1300px;
+    transition: 0.5s;
+    font-size: 100px;
+    text-align: left;
+    font-weight: 700;   
+} 
+#titlePageH1 p{
+    margin: 0;
+}
+#titlePageH1 p:last-child{
+    color: #000;
+}
+#titlePage nav{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;  
+    height: 100px;
+    line-height: 100px;
+    padding: 0 60px 0 60px;
+    box-sizing: border-box;
+}
+#titlePage nav *{
+    display: inline;
+}
+#titlePage nav div{
+    float: right;
+}
+#titlePage nav div button{
+    margin-left: 40px;
+    background: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+    font-family: montserrat;
+}
+#titlePage nav div button:hover{
+    text-decoration: none;
+}
+#titlePage nav div button:first-child{
+    margin-left: 0px;
+}
+#titlePage nav h2{
+    float: left;
+    margin: 0;
+    font-weight: 300;
+}
+button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+}

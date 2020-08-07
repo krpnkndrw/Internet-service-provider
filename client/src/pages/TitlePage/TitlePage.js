@@ -1,5 +1,6 @@
-import  React from 'react';
-import { AddressFinder } from '../../components/AddressFinder/AddressFinder';
+import  React from 'react'
+import { Link } from 'react-router-dom'
+import { AddressFinder } from '../../components/AddressFinder/AddressFinder'
 import './TitlePage.css'
 
 export const TitlePage = (props) => {
@@ -16,8 +17,12 @@ export const TitlePage = (props) => {
                     <h2 id='titlePageTitle'
                         >Подключение интернета в Омске</h2>
                     <div>
-                        <button>Все тарифы</button>
-                        <button>Логин</button>
+                        <Link to='/allTariffs'> 
+                            Все тарифы 
+                        </Link>
+                        <Link to='/admin'> 
+                            Админ 
+                        </Link>
                     </div>                  
                 </nav>
                 <h1 id='titlePageH1'>

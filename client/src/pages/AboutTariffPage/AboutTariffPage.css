@@ -1,0 +1,26 @@
+#AboutTariffPage{
+    background-color: #F5F5F5;    
+}
+#AboutTariffPageContent{
+    padding: 70px 50px 0 50px;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    justify-content: center; 
+    align-items: flex-start;
+}
+#TariffRequestFormSidebar{
+    width: 100%;
+    position: fixed;
+    top: 120px;
+    display: flex;
+    justify-content: center;
+}
+#TariffRequestFormSidebar>div{
+    width: 1500px;
+    min-width: 1150px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 50px;
+}
+

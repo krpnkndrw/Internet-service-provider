@@ -10,6 +10,7 @@ export const AllTariffsPage = (props) => {
             <h2>Все тарифы</h2> 
             <TableOfTariffs 
                 allTariffs ={props.allTariffs}
+                setDataForRequest={props.setDataForRequest}
             />           
         </div>
     )

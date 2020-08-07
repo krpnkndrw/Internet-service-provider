@@ -49,7 +49,7 @@
     transition: width 1s, height 1s;
 }
 #addressFinder #submitButton:disabled{
-    background-color: #6d1616;
+    background-color: #ac2121;
 }
 #addressFinder button{
     outline: none;
@@ -150,7 +150,7 @@
     transition: width 1s, height 1s;
 }
 #addressFinder #submitButton:disabled{
-    background-color: #6d1616;
+    background-color: #ac2121;
 }
 #addressFinder button{
     outline: none;

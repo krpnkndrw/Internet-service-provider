@@ -1,10 +1,12 @@
 import  React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom'
 import './TariffsTable.css'
 
 export const TableOfTariffs = (props) => {
 
-    const [allTariffs, setAllTariffs] = useState(props.allTariffs)
-    const [sort, setSort] = useState({
+    const [allTariffs, setAllTariffs] = useState([])
+    const [sortConfig, setSortConfig] = useState({
+        column: '',
         direction: 1
     })
 
@@ -14,11 +16,27 @@ export const TableOfTariffs = (props) => {
 
     const symbolReplace = (string) => {
         if(string === 'Безлимит'){
-            return <i class="fas fa-infinity"></i>
-        } else if(string === 0){
-            return <div className='dash'></div> //ПЕРЕДЕЛАТЬ
+            return <img id='infinitySymbol' src='http://localhost:3000/static/infinity_lighter.png'/>
+        } else if(string === 0 || string === 'нет'){
+            return <div className='dash'><p style={{'display': 'none'}}>{string}</p></div> 
         }
-        else return string
+        else return <div><p>{string}</p></div>
+    }
+    const optionTooltip = (option, price, symbol) => {
+        if(price && option != 'нет'){
+            return (<div className='optionSymbol'>                        
+                        {<i className={`fas fa-${symbol}`} style={{'color': '#DB2A2A'}}></i>}
+                        <span class="tooltiptext">{option}{(price != 'бесплатно')? ` за ${price} руб/мес`: ` бесплатно`}</span>
+                    </div>)
+        }else if(!price && option != 'нет'){
+            return (<div className='optionSymbol'>
+                        <i className={`fas fa-${symbol}`} style={{'color': '#DB2A2A'}}></i>
+                        <span class="tooltiptext">{option}</span>
+                    </div>)
+        }
+         else return ( <div className='optionSymbol'>
+                            <i className={`fas fa-${symbol}`}></i>
+                        </div>)
     }
 
     //Создание таблицы
@@ -27,32 +45,45 @@ export const TableOfTariffs = (props) => {
             <div key={element._id} id={`row${index + 1}`} className='row'>
                 <div className='cell columnProvider'>{chooseProviderLogo(element['Провайдер'])}</div>
                 <div className='cell columnName'><p>{element['Название']}</p></div>
-                <div className='cell columnSpeed'><p>{element['Скорость']}</p><p>Мбит/с</p></div>
-                <div className='cell columnChannels'><p>{symbolReplace(element['Каналы'])}</p><p>Каналов</p></div>
+                <div className='cell columnSpeed'><div><p>{element['Скорость']}</p></div><p>Мбит/с</p></div>
+                <div className='cell columnChannels'>{symbolReplace(element['Каналы'])}<p>Каналов</p></div>
                 <div className='cell columnMobile'>
                     <div>
-                        <p>{symbolReplace(element['Мобильный интернет'])}</p><p>{element['Мобильная связь']}</p><p>{element['СМС']}</p>
+                        {symbolReplace(element['Мобильный интернет'])}
+                        <p>Гб</p>
                     </div>
                     <div>
-                        <p>Гб</p><p>мин</p><p>смс</p>
+                        {symbolReplace(element['Мобильная связь'])}
+                        <p>мин</p>
                     </div>
+                    <div>
+                        {symbolReplace(element['СМС'])}
+                        <p>смс</p>
                     </div>
-                <div className='cell columnOptions'><i class="fas fa-wifi"></i><i class="fas fa-tv"></i><i class="fas fa-info-circle"></i><i class="fas fa-gift"></i></div>
+                </div>
+                <div className='cell columnOptions'>
+                    {optionTooltip(element['Роутер'], element['Стоимость роутера'], 'wifi')}  
+                    {optionTooltip(element['ТВ-приставка'], element['Стоимость ТВ-приставки'], 'tv')}
+                    <i className="fas fa-info-circle"></i>{/*доп инфы и акций в бд пока нет*/}
+                    <i className="fas fa-gift"></i>
+                </div>
                 <div className='cell columnPrice'>
                     <div>
                         <p>{element['Цена']}</p>
                         <p>руб/мес</p>
                     </div>
-                    <button onClick={() => {
-                        props.setDataForRequest({
-                            ...props.dataForRequest,
-                            tariff: element
-                        })
-                    }}>Выбрать
-                    </button>
+                    <Link to='/aboutTariff' onClick={() => chooseTariffHandler(element)}>
+                        Выбрать
+                    </ Link>
                 </div>
             </div>
         )  
+    }
+    const chooseTariffHandler = (element) => {
+        props.setDataForRequest({
+            ...props.dataForRequest,
+            tariff: element
+        })
     }
 
     //Подстановка логотипа провайдера
@@ -62,32 +93,50 @@ export const TableOfTariffs = (props) => {
         if(provider === 'МТС') return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
         if(provider === 'Ростелеком') return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
     }
+
+    const mobileSort = (element) => {
+        if (element === 'Безлимит') return 9999
+        else if (element === 'нет') return 0
+        else return +element
+    }
+    const optionSort = (element) => {
+        if (element === 'нет') return 0
+        else return 1
+    }
     
     //Сортировка столбцов
     const sortingByСolumn = (column) => {
+        let direction = 1
+        if (
+            sortConfig.column === column &&
+            sortConfig.direction === 1
+        ) {
+            console.log('change')
+            direction = -1
+        }
         const newTariffs = allTariffs.sort( (a, b) => {
-            if(column === 'Стоимость подключения' || column === 'Цена'){
-                a = +a[column].split(' ')[0]
-                b = +b[column].split(' ')[0]
-            } else if(column === 'Провайдер' || column === 'Название'){
+            if(column === 'columnMobile'){
+                a = mobileSort(a['Мобильный интернет']) + mobileSort(a['Мобильная связь']) + mobileSort(a['СМС'])
+                b = mobileSort(b['Мобильный интернет']) + mobileSort(b['Мобильная связь']) + mobileSort(b['СМС'])
+            }else if(column === 'columnOptions'){
+                a = optionSort(a['Роутер']) + optionSort(a['ТВ-приставка'])
+                b = optionSort(b['Роутер']) + optionSort(b['ТВ-приставка'])
+            } else {
                 a = a[column]
                 b = b[column]
             }
             if (a > b) {
-                 return -1 * sort.direction
+                return -1 * direction
             }
-            if (a < b) {
-                return 1 * sort.direction
-            }
-            //if(a === b){
-                return 0
-            //}   
+            else if (a < b) {
+                return 1 * direction
+            } else return 0 
         }) 
-        setSort({
-            direction: sort.direction*(-1)
+        setSortConfig({
+            column,
+            direction
         })
         setAllTariffs(newTariffs)
-        //createTable()
     }
     //<i class="fas fa-infinity"></i>
     return( 
@@ -97,9 +146,9 @@ export const TableOfTariffs = (props) => {
                     <div className='cell columnProvider'><button onClick={() =>sortingByСolumn('Провайдер')}>Провайдер</button></div>
                     <div className='cell columnName'><button onClick={() =>sortingByСolumn('Название')}>Тариф</button></div>
                     <div className='cell columnSpeed'><button onClick={() =>sortingByСolumn('Скорость')}>Скорость</button></div>
-                    <div className='cell columnChannels'><button onClick={() =>sortingByСolumn('Скорость')}>Каналы</button></div>
-                    <div className='cell columnMobile'><button onClick={() =>sortingByСolumn('Название')}>Моб. связь</button></div>
-                    <div className='cell columnOptions'><button onClick={() =>sortingByСolumn('Название')}>Опции</button></div>
+                    <div className='cell columnChannels'><button onClick={() =>sortingByСolumn('Каналы')}>Каналы</button></div>
+                    <div className='cell columnMobile'><button onClick={() =>sortingByСolumn('columnMobile')}>Моб. связь</button></div>
+                    <div className='cell columnOptions'><button onClick={() =>sortingByСolumn('columnOptions')}>Опции</button></div>
                     <div className='cell columnPrice'><button onClick={() =>sortingByСolumn('Цена')}>Стоимость</button></div>  
                 </div>           
                 {createTable()}

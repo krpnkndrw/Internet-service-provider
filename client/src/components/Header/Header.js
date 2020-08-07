@@ -17,6 +17,7 @@ export const Header = () => {
                 <div></div>
             </div>
             <nav>
+                <div>
                 <Link to='/'> 
                     Подключение интернета в Омске
                 </Link>
@@ -36,16 +37,12 @@ export const Header = () => {
                             Админ 
                         </Link>
                     </li>
-                    <li>
-                        <Link to='/admin'> 
-                            Админ 
-                        </Link>
-                    </li>
                     {auth.isAuthenticated
                         ?<button onClick ={logoutHandler}>Выйти</button>
                         :null
                     } 
                 </ul>
+                </div>
             </nav>
         </header>
     )

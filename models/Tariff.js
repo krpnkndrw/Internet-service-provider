@@ -7,7 +7,7 @@ let tariff = new mongoose.Schema({
     'Стоимость подключения':    {type: Number},
     'Роутер':                   {type: String},
     'Стоимость роутера':        {type: Number},
-    'Каналы':                   {type: Number},
+    'Каналы':                   {type: String},
     'ТВ-приставка':             {type: String},
     'Стоимость ТВ-приставки':   {type: Number},
     'Мобильный интернет':       {type: String},

@@ -12,13 +12,9 @@ export const TariffCards = (props) => {
         return <TariffCard 
                     index={index}
                     key={index} 
-                    provider={element['Провайдер']} 
-                    tariffName={element['Название']} 
-                    speed={element['Скорость']} 
-                    price={element['Цена']} 
-                    channels={element['Каналы']}
-                    mobileEnternet={element['Мобильный интернет']}
-                    mobileCalls={element['Мобильная связь']}                 
+                    tariff={element}
+                    dataForRequest={props.dataForRequest}
+                    setDataForRequest={props.setDataForRequest}               
                 />
     })  
     return( 

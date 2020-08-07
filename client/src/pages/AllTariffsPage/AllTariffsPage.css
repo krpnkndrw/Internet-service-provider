@@ -1,3 +1,9 @@
 #AllTariffsPage{
     padding-top: 70px;
 }
+#AllTariffsPage>h2{
+    margin-top: 30px;
+    margin-bottom: 0;
+    font-size: 40px;
+    font-weight: 500;
+}

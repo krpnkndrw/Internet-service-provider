@@ -36,6 +36,8 @@ export const AvailableTariffsPage = (props) => {
             }
             <TariffCards 
                 allTariffs={choosenTariffs}
+                dataForRequest={props.dataForRequest}
+                setDataForRequest={props.setDataForRequest}
             />
         </div>
     )

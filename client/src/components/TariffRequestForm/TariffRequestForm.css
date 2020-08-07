@@ -1,0 +1,77 @@
+#TariffRequestForm{
+    /* position: fixed;
+    right: 50px;
+    top: 120px; */
+    width: 350px;
+    /*height: 500px;*/
+    background-color: #fff;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+#TariffRequestForm p{
+    margin: 0;
+}
+#TariffRequestForm>p:first-child{
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+#TariffRequestForm>p:nth-of-type(2){
+    text-align: left;
+    margin: 0 30px;
+    font-size: 20px;
+}
+#TariffRequestForm>div{
+    width: 250px;
+    display: flex;
+    justify-content: space-between;  
+    margin:auto;
+    margin-top: 10px;
+}
+#TariffRequestForm>div:nth-of-type(1){
+    margin-top: 40px;
+}
+#TariffRequestForm>div:last-of-type{
+    border-top: 1px solid #DB2A2A;
+    padding-top: 10px
+}
+#TariffRequestForm>form{
+    margin-top: 30px;
+}
+#TariffRequestForm *{
+    font-family: montserrat;
+}
+#TariffRequestForm>form>input{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    width: 250px;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 5px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+#TariffRequestForm>form>input:focus{
+    border-bottom: 1px solid #DB2A2A;    
+}
+#TariffRequestForm>form>input:valid{
+    border-bottom: 1px solid #DB2A2A;    
+}
+
+#TariffRequestForm button,  #TariffRequestForm a{
+    background-color: #DB2A2A;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 12px 40px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+#TariffRequestForm>form>button{     
+    margin-top: 30px;
+}
+#TariffRequestForm>form>button:disabled{     
+    background-color: #bbbbbb;
+}

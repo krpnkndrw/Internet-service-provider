@@ -47,21 +47,21 @@ function App() {
 const [dataForRequest, setDataForRequest] = useState(dataForRequestInit) 
 //const [successModalShow, setSuccessModalShow] = useState(false)
 
-// const requestSend = async() => {
-//     setSuccessModalShow(true)
-//     setDataForRequest(dataForRequestInit)
-//     console.log(dataForRequest)
-//     /*const response = await */fetch('/api/database/newinternetrequest', {
-//         method: 'POST',
-//         headers: {
-//         'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(dataForRequest),
-//     })
-//     setHouseInput('')
-//     setStreetInput('')
-//     setAddressFinderCondition('waitingOfStreet')
-// } 
+const sendRequest = async() => {
+    //setSuccessModalShow(true)
+    setDataForRequest(dataForRequestInit)
+    console.log(dataForRequest)
+    /*const response = await */fetch('/api/database/newinternetrequest', {
+       method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataForRequest),
+    })
+    setHouseInput('')
+    setStreetInput('')
+    //setAddressFinderCondition('waitingOfStreet')
+} 
 ////////////////////////STATE////////////////////////////
     const [listOfAllAddresses, setListOfAllAddresses] = useState([])
     const [allTariffs, setAllTariffs] = useState([{
@@ -120,6 +120,7 @@ const [dataForRequest, setDataForRequest] = useState(dataForRequestInit)
       fullInfOfHouse()
   }
 
+
   return(
     <AuthContext.Provider value={{
       token, userId, login, logout, isAuthenticated
@@ -137,6 +138,8 @@ const [dataForRequest, setDataForRequest] = useState(dataForRequestInit)
             setAddressFinderCondition={setAddressFinderCondition}
             submitHandler={submitHandler}
             dataForRequest={dataForRequest}
+            setDataForRequest={setDataForRequest}
+            sendRequest={sendRequest}
           />
         </Router>
       </div>

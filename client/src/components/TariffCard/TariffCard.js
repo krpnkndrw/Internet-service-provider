@@ -1,8 +1,16 @@
-import  React from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import './TariffCard.css'
 
 export const TariffCard = (props) => { 
-    const {provider, tariffName, speed, price, channels, mobileEnternet, mobileCalls} = props   
+
+    const provider = props.tariff['Провайдер']
+    const tariffName = props.tariff['Название']
+    const speed = props.tariff['Скорость']
+    const price = props.tariff['Цена']
+    const channels = props.tariff['Каналы']
+    const mobileEnternet = props.tariff['Мобильный интернет']
+    const mobileCalls = props.tariff['Мобильная связь']
 
     const chooseProviderLogo = (provider) => {
         if(provider === 'ДОМ.ru') return <img src='http://localhost:3000/static/DOMru3.png' alt={provider}></img>
@@ -10,27 +18,8 @@ export const TariffCard = (props) => {
         if(provider === 'МТС') return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
         if(provider === 'Ростелеком') return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
     }
-    // return( 
-    //     <div id='TariffCard' /*style={{animation: `0.8s cubic-bezier(0.895, 0.03, 0.685, 0.22) ${0.2*props.index}s forwards appereance`}}*/>
-    //         <div>
-    //             <p>{tariffName}</p>
-    //             {chooseProviderLogo(provider)}
-    //         </div>
-    //         <div>
-    //             <div>
-    //                 <p>Скорость</p>
-    //                 <p>{speed}</p>
-    //             </div>
-    //             <div>
-    //                 <p>Цена</p>
-    //                 <p>{price}</p>
-    //             </div>
-    //         </div>
-    //         <div>
-    //             <button>Подключить</button>
-    //         </div>
-    //     </div> 
-    // )
+    //<div id='TariffCard' /*style={{animation: `0.8s cubic-bezier(0.895, 0.03, 0.685, 0.22) ${0.2*props.index}s forwards appereance`}}*/>
+
     
     const channelPostfix = (channels) => {
         let lastNumber = `${channels}`.slice(-1);
@@ -45,6 +34,13 @@ export const TariffCard = (props) => {
             return 'каналов'
         } 
     }
+    const chooseTariffHandler = () => {
+        props.setDataForRequest({
+            ...props.dataForRequest,
+            tariff: props.tariff
+        })
+    }
+    
     return(
         <div id='TariffCard'>
             <div>
@@ -58,16 +54,16 @@ export const TariffCard = (props) => {
                         </div>                        
                         <div>
                             <p>Цифровое тв</p>
-                            {(channels === 0)
-                                ?<p class='failure'>Не входит</p>
+                            {(channels === 'нет')
+                                ?<p className='failure'>Не входит</p>
                                 :<p><span>{channels}</span> {channelPostfix(channels)}</p>
                             }                            
                         </div>
-                    </div>                    
+                    </div> 
                         {(mobileCalls === 'нет')
                             ?(<div>
                                 <p>Мобильная связь</p>
-                                <p class='failure'>Не входит</p>
+                                <p className='failure'>Не входит</p>
                             </div>)
                             :(<div>
                                 <p>Мобильная связь</p>
@@ -89,7 +85,9 @@ export const TariffCard = (props) => {
                     <span>{price}</span>
                     р/мес
                 </p>
-                <button>Подключить</button>
+                <Link to='/aboutTariff' onClick={chooseTariffHandler}>
+                    Подключить
+                </ Link>
             </div>
         </div>
     )

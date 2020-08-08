@@ -1,3 +1,3 @@
 # Internet-service-provider
-- MERN project
+- MERN (MongoDB, Express, React, Node.js)
 - JWT authentication 

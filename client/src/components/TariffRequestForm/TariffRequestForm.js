@@ -1,4 +1,4 @@
-import  React from 'react'
+import  React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './TariffRequestForm.css'
 
@@ -6,8 +6,28 @@ export const TariffRequestForm = (props) => {
     const connectPrice = props.dataForRequest.tariff['Стоимость подключения']
     const price = props.dataForRequest.tariff['Цена']
     const house = props.dataForRequest.house
+    const routerPrice = props.dataForRequest.tariff['Стоимость роутера']
+    const tvRouterPrice = props.dataForRequest.tariff['Стоимость ТВ-приставки']
 
-    const inputHandler = (event) => {    
+    
+    const initErrorMessage = {
+        name: '',
+        phone: ''
+    }
+    const [errorMessage, setErrorMessage] = useState(initErrorMessage)
+
+    const totalCostCalc = () => {
+        let newTotalCost = connectPrice + price
+        if(props.addOptions.router){
+            newTotalCost += routerPrice
+        }
+        if(props.addOptions.tvRouter){
+            newTotalCost += tvRouterPrice
+        }
+        return newTotalCost
+    }
+
+    const inputHandler = (event) => {            
         props.setDataForRequest({
             ...props.dataForRequest,
             [event.target.name]: event.target.value
@@ -15,7 +35,22 @@ export const TariffRequestForm = (props) => {
     }
     const sumbitHandler = (event) => {
         event.preventDefault()
-        props.sendRequest()
+        console.log(!props.dataForRequest.name, !props.dataForRequest.phone, !props.dataForRequest.name || !props.dataForRequest.phone)
+        if(!props.dataForRequest.name || !props.dataForRequest.phone){
+            const newErrorMessage = {
+                name: '',
+                phone: ''
+            }
+            if(!props.dataForRequest.name){
+                newErrorMessage.name = 'Введите имя'
+            }
+            if(!props.dataForRequest.phone){
+                newErrorMessage.phone = 'Введите номер'
+            }
+            setErrorMessage(newErrorMessage)
+        }else {
+            props.sendRequest()
+        }
     }
     return(
         <div id='TariffRequestForm'>
@@ -40,9 +75,23 @@ export const TariffRequestForm = (props) => {
                 <p>Абонентская плата</p>
                 <p><span>{price}</span><span> руб</span></p>
             </div>
+            {
+                props.addOptions.router &&
+                    <div>
+                        <p>Роутер</p>
+                        <p><span>{routerPrice}</span><span> руб</span></p>
+                    </div>
+            }
+            {
+                props.addOptions.tvRouter &&
+                    <div>
+                        <p>ТВ-приставка</p>
+                        <p><span>{tvRouterPrice}</span><span> руб</span></p>
+                    </div>
+            }
             <div>
                 <p>Итого</p>
-                <p><span>{connectPrice + price}</span><span> руб</span></p>
+                <p><span>{totalCostCalc()}</span><span> руб</span></p>
             </div>      
             <form>
                 <input 
@@ -53,6 +102,7 @@ export const TariffRequestForm = (props) => {
                     onChange={inputHandler}
                     required
                 />
+                {errorMessage.name && <div className='requestFormError'>{errorMessage.name}</div>}
                 <input 
                     type='text' 
                     placeholder='Телефон'
@@ -61,11 +111,13 @@ export const TariffRequestForm = (props) => {
                     onChange={inputHandler}
                     required
                 />
+                {errorMessage.phone && <div className='requestFormError'>{errorMessage.phone}</div>}
                 <button
                     type="submit"
                     disabled={house ? false : true}
                     onClick={sumbitHandler}
-                >Отправить заявку
+                >
+                    Отправить заявку
                 </button>
             </form>
         </div>

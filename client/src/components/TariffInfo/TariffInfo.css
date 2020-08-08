@@ -1,6 +1,6 @@
 #TariffInfo{
     background-color: #fff;
-    margin-top: 50px;
+    /* margin-top: 50px;*/
     /* flex-grow: 1; */
     padding: 70px 80px;
     display: flex;
@@ -33,11 +33,15 @@
     margin-top: 25px;
     font-size: 20px;
     margin-left: 30px;
+    width: 100%;
 }
 #TariffInfo>div div{
     text-align: left;
     /* margin-left: 30px; */
     /* display: flex;*/
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
 }
 #TariffInfo>div div p:nth-child(2) span:nth-child(1){
     font-size: 25px;
@@ -57,4 +61,8 @@
 #TariffInfo>div div p:nth-child(2){
     margin: 0;
     display: inline-block;
+}
+#TariffInfo input[type='checkbox']{
+    width: 20px;
+    height: 20px;
 }

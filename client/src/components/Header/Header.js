@@ -31,16 +31,23 @@ export const Header = () => {
                         <Link to='/allTariffs'> 
                             Все тарифы 
                         </Link>
-                    </li>
-                    <li>
-                        <Link to='/admin'> 
-                            Админ 
-                        </Link>
-                    </li>
+                    </li> 
                     {auth.isAuthenticated
-                        ?<button onClick ={logoutHandler}>Выйти</button>
+                        ?<li>
+                            <Link to='/admin'> 
+                                Админ 
+                            </Link>
+                        </li> 
                         :null
-                    } 
+                    }                    
+                    <li>
+                        {auth.isAuthenticated
+                            ?<button onClick ={logoutHandler}>Выйти</button>
+                            :<Link to='/admin'> 
+                                Войти 
+                            </Link>
+                        }
+                    </li> 
                 </ul>
                 </div>
             </nav>

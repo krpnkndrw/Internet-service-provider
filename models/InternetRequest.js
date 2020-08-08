@@ -7,6 +7,7 @@ let internetRequestShema = new mongoose.Schema({
     address:        {type: String, required: false},
     house:          {type: Object, required: false},
     tariff:         {type: Object, required: false},
+    options:        {type: Object, required: false},
     dateOfRequest:  {type: Date,   required: false},
     done:           {type: Boolean,required: false},
     dateOfDone:     {type: Date,   required: false},

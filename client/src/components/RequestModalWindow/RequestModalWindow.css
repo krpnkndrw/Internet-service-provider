@@ -6,6 +6,7 @@
     height: 100%;
     opacity: 0.3;
     background-color: #000;
+    z-index: 10000;
 }
 #successRequestModalWindow{
     position: fixed;
@@ -14,11 +15,13 @@
     transform: translate(-50%, -50%);
     width: 400px;
     background-color: #fff;
+    padding: 50px;
+    z-index: 10000;
 }
 #successRequestModalWindow button{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
     outline: none;
@@ -26,4 +29,7 @@
 }
 #successRequestModalWindow button i{
     font-size: 25px;
+}
+#successRequestModalWindow h2{
+    margin-bottom: 50px;
 }

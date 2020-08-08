@@ -44,7 +44,7 @@
     width: 330px;
     height: 60px;
     outline: none;
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
     transition: width 1s, height 1s;
 }
@@ -71,7 +71,7 @@
     background-color: #fff;
 }
 #addressFinder #streetHintsList button:hover{
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
 }
 #addressFinder #houseHintsList{
@@ -89,7 +89,7 @@
     background-color: #fff;
 }
 #addressFinder #houseHintsList button:hover{
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
 }
 .show{
@@ -145,7 +145,7 @@
     width: 330px;
     height: 60px;
     outline: none;
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
     transition: width 1s, height 1s;
 }
@@ -172,7 +172,7 @@
     background-color: #fff;
 }
 #addressFinder #streetHintsList button:hover{
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
 }
 #addressFinder #houseHintsList{
@@ -190,7 +190,7 @@
     background-color: #fff;
 }
 #addressFinder #houseHintsList button:hover{
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
 }
 .show{

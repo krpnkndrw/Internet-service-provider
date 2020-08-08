@@ -1,11 +1,9 @@
 #AboutTariffPage{
-    background-color: #F5F5F5;    
 }
 #AboutTariffPageContent{
-    padding: 70px 50px 0 50px;
+    padding: 0 50px;
     display: flex;
     flex-direction: row;
-    height: 100vh;
     justify-content: center; 
     align-items: flex-start;
 }

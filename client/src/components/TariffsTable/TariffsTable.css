@@ -5,16 +5,17 @@
 #tariffsForAddress .table{
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border: 1px solid #000;
     border-radius: 3px;
     border-bottom: none;
     width: 1500px;
     margin: auto;
+    background-color: #fff;
 }
 #tariffsForAddress .row{
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000;
 }
 #tariffsForAddress .cell{
     width: 300px;
@@ -41,7 +42,7 @@
     font-size: 25px;
 }
 #tariffsForAddress .columnOptions i.active{
-    color: #DB2A2A;
+    color: var(--red-accent-color);
 }
 #tariffsForAddress .columnPrice{
     flex-direction: row;
@@ -52,13 +53,16 @@
     display:flex;
     flex-direction: column;
 }
-#tariffsForAddress .columnPrice button:not(:first-child){
+#tariffsForAddress .columnPrice a:not(:first-child){
     color: #fff;
-    background-color: #DB2A2A;
-    width: 120px;
-    height: 40px;
+    background-color: var(--red-accent-color);
+    padding: 10px 20px;
     border: none;
     margin: 0;
+    text-decoration: none;
+}
+#tariffsForAddress .columnPrice a:hover{
+    background-color: #ec2d2d;
 }
 #tariffsForAddress .columnPrice div p:nth-child(1){
     font-size: 30px;
@@ -102,7 +106,7 @@
     margin: auto;
 }
 #tariffsForAddress .cell:not(.columnPrice){
-    border-right: 1px solid black;
+    border-right: 1px solid #000;
 }
 #tariffsForAddress .cell:not(.columnMobile){
     align-items: center;
@@ -110,7 +114,7 @@
 #tariffsForAddress button{
     outline: none;
     cursor: pointer;  
-    border: 1px solid black;  
+    border: 1px solid #000;  
     border-radius: 2px;
 }
 #tariffsForAddress button:hover{
@@ -128,11 +132,11 @@
     height: 65px;
 }
 #tariffsForAddress .columnPrice button{
-    border: 1px solid black;
+    border: 1px solid #000;
     box-sizing: border-box;
 }
 #tariffsForAddress .row .columnPrice button:hover{
-    border: 1px solid black;
+    border: 1px solid #000;
 }
 #tariffsForAddress .dash{
     width: 18px;
@@ -171,5 +175,5 @@
     visibility: visible;
   }
   .optionSymbol i {
-      color: #DB2A2A;
+      color: var(--red-accent-color);
   }

@@ -1,8 +1,7 @@
-import  React, { useEffect, useState } from 'react';
-import { AddressFinder } from '../../components/AddressFinder/AddressFinder';
-import { Header } from '../../components/Header/Header';
+import  React, { useEffect, useState } from 'react'
+import { AddressFinder } from '../../components/AddressFinder/AddressFinder'
 import './AvailableTariffsPage.css'
-import { TariffCards } from '../../components/TariffCards/TariffCards';
+import { TariffCards } from '../../components/TariffCards/TariffCards'
 
 export const AvailableTariffsPage = (props) => {
     const [choosenTariffs, setChoosenTariffs] = useState([])
@@ -16,8 +15,7 @@ export const AvailableTariffsPage = (props) => {
         }
     }, [props.dataForRequest])
     return( 
-        <div id='availableTariffsPage'>
-            <Header />
+        <div id='availableTariffsPage' className='page'>
             <h2>Подбор тарифа по адресу</h2>
             <AddressFinder
                 listOfAllAddresses={props.listOfAllAddresses}

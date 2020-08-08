@@ -16,22 +16,22 @@ export const TableOfTariffs = (props) => {
 
     const symbolReplace = (string) => {
         if(string === 'Безлимит'){
-            return <img id='infinitySymbol' src='http://localhost:3000/static/infinity_lighter.png'/>
+            return <img id='infinitySymbol' src='http://localhost:3000/static/infinity_lighter.png' alt='infinitySymbol'/>
         } else if(string === 0 || string === 'нет'){
             return <div className='dash'><p style={{'display': 'none'}}>{string}</p></div> 
         }
         else return <div><p>{string}</p></div>
     }
     const optionTooltip = (option, price, symbol) => {
-        if(price && option != 'нет'){
+        if(price && option !== 'нет'){
             return (<div className='optionSymbol'>                        
                         {<i className={`fas fa-${symbol}`} style={{'color': '#DB2A2A'}}></i>}
-                        <span class="tooltiptext">{option}{(price != 'бесплатно')? ` за ${price} руб/мес`: ` бесплатно`}</span>
+                        <span className="tooltiptext">{option}{(price !== 'бесплатно')? ` за ${price} руб/мес`: ` бесплатно`}</span>
                     </div>)
-        }else if(!price && option != 'нет'){
+        }else if(!price && option !== 'нет'){
             return (<div className='optionSymbol'>
                         <i className={`fas fa-${symbol}`} style={{'color': '#DB2A2A'}}></i>
-                        <span class="tooltiptext">{option}</span>
+                        <span className="tooltiptext">{option}</span>
                     </div>)
         }
          else return ( <div className='optionSymbol'>
@@ -41,7 +41,7 @@ export const TableOfTariffs = (props) => {
 
     //Создание таблицы
     const createTable = () => { 
-        return allTariffs.map( (element, index) =>
+        return allTariffs.map( (element, index) =>            
             <div key={element._id} id={`row${index + 1}`} className='row'>
                 <div className='cell columnProvider'>{chooseProviderLogo(element['Провайдер'])}</div>
                 <div className='cell columnName'><p>{element['Название']}</p></div>

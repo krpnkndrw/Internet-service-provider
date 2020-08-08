@@ -31,7 +31,7 @@
     margin-top: 40px;
 }
 #TariffRequestForm>div:last-of-type{
-    border-top: 1px solid #DB2A2A;
+    border-top: 1px solid var(--red-accent-color);
     padding-top: 10px
 }
 #TariffRequestForm>form{
@@ -53,14 +53,14 @@
     transition: 0.5s;
 }
 #TariffRequestForm>form>input:focus{
-    border-bottom: 1px solid #DB2A2A;    
+    border-bottom: 1px solid var(--red-accent-color);    
 }
 #TariffRequestForm>form>input:valid{
-    border-bottom: 1px solid #DB2A2A;    
+    border-bottom: 1px solid var(--red-accent-color);    
 }
 
 #TariffRequestForm button,  #TariffRequestForm a{
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
     font-size: 20px;
     font-weight: 400;

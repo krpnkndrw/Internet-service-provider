@@ -1,9 +1,4 @@
 #Auth{
-    /*display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;*/
-    /*width: 400px;*/
     background: #fff;
     padding: 50px;
     position: absolute;
@@ -14,13 +9,9 @@
 #Auth *{
     font-family: montserrat;
 }
-#Auth>div:first-of-type{
-    /*margin: 20px 0;*/
-}
 #Auth>div:first-of-type>button{
     background-color: transparent;
     color: #000;
-    /*padding: 15px 32px;*/
     font-size: 18px;
     border-bottom: 1px solid #F5F5F5;
 }
@@ -28,7 +19,7 @@
     border-bottom: 1px solid #bbb8b8;
 }
 #Auth>div:first-of-type>button.ModActive{
-    border-bottom: 1px solid #DB2A2A;
+    border-bottom: 1px solid var(--red-accent-color);
 }
 #Auth>div:first-of-type>button:first-of-type{
     margin-right: 20px;
@@ -48,9 +39,9 @@
 #Auth form button{
     width: 250px;
     height: 50px;
-    background-color: #DB2A2A;
+    background-color: var(--red-accent-color);
     color: #fff;
-    margin-top: 50px;
+    margin-top: 30px;
     font-size: 20px;
 }
 #Auth input{
@@ -67,8 +58,13 @@
     transition: 0.3s;
 }
 #Auth input:focus{
-    border-bottom: 1px solid #DB2A2A;    
+    border-bottom: 1px solid var(--red-accent-color);    
 }
 #Auth input:valid{
-    border-bottom: 1px solid #DB2A2A;    
+    border-bottom: 1px solid var(--red-accent-color);    
+}
+.errorMessage{
+    height: 15px;
+    transition: 1s;
+    margin-top: 10px;
 }

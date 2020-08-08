@@ -3,6 +3,9 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 import { AuthContext } from './context/AuthContext'
 import { Routes } from './Routes'
+import { Header } from './components/Header/Header'
+import { Footer } from './components/Footer/Footer'
+import { RequestModalWindow } from './components/RequestModalWindow/RequestModalWindow'
 
 function App() {
 ////////////////////////AUTH////////////////////////////
@@ -35,23 +38,30 @@ function App() {
       localStorage.removeItem('User')
     }
   }, [token, userId])
-////////////////////////SEND_REQUEST////////////////////////////
-  const dataForRequestInit = {
-    house: '',
-    tariff: '',
-    phone: '',
-    email: '',
-    name: '',
-    done: false
+////////////////////////////////////////////////////
+const dataForRequestInit = {
+  house: '',
+  tariff: '',
+  phone: '',
+  email: '',
+  name: '',
+  done: false
 }
 const [dataForRequest, setDataForRequest] = useState(dataForRequestInit) 
-//const [successModalShow, setSuccessModalShow] = useState(false)
+const [requestModalWindowShow, setRequestModalWindowShow] = useState(false)
+const [listOfAllAddresses, setListOfAllAddresses] = useState([])
+const [allTariffs, setAllTariffs] = useState([{
+  'Провайдер': '' 
+}])
+const [houseInput, setHouseInput] = useState('')
+const [streetInput, setStreetInput] = useState('')
+const [addressFinderCondition, setAddressFinderCondition] = useState('waitingOfStreet')
 
 const sendRequest = async() => {
-    //setSuccessModalShow(true)
+    setRequestModalWindowShow(true)
     setDataForRequest(dataForRequestInit)
     console.log(dataForRequest)
-    /*const response = await */fetch('/api/database/newinternetrequest', {
+    fetch('/api/database/newinternetrequest', {
        method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -59,65 +69,51 @@ const sendRequest = async() => {
         body: JSON.stringify(dataForRequest),
     })
     setHouseInput('')
-    setStreetInput('')
+    setStreetInput('')    
     //setAddressFinderCondition('waitingOfStreet')
-} 
-////////////////////////STATE////////////////////////////
-    const [listOfAllAddresses, setListOfAllAddresses] = useState([])
-    const [allTariffs, setAllTariffs] = useState([{
-        'Провайдер': '' 
-    }])
-
-    useEffect( () => {
-        const loadListOfAllAddreses = async() => {
-            const response = await fetch('/api/database/listOfAllAddresses', {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-            });
-            const [listOfAllAddresses] = await response.json()          
-            setListOfAllAddresses(listOfAllAddresses.list)
-        }
-        const loadAllTariffs= async() => {
-            const response = await fetch('/api/database/tariffs', {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-            });
-            const newAllTariffs = await response.json()            
-            setAllTariffs(newAllTariffs)
+}
+  useEffect( () => {
+    const loadListOfAllAddreses = async() => {
+      const response = await fetch('/api/database/listOfAllAddresses', {
+        method: 'GET',
+          headers: {
+          'Content-Type': 'application/json'
+          },
+        });
+        const [listOfAllAddresses] = await response.json()          
+        setListOfAllAddresses(listOfAllAddresses.list)
+      }
+      const loadAllTariffs= async() => {
+        const response = await fetch('/api/database/tariffs', {
+          method: 'GET',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+          });
+          const newAllTariffs = await response.json()            
+          setAllTariffs(newAllTariffs)
         }
         loadListOfAllAddreses()
         loadAllTariffs() 
-    }, [] )
+  }, [] )  
 
-    const [houseInput, setHouseInput] = useState('')
-    const [streetInput, setStreetInput] = useState('')
-    const [addressFinderCondition, setAddressFinderCondition] = useState('waitingOfStreet')
-
-    const submitHandler = () => {
-      console.log('submitHandler start')
-      const fullInfOfHouse = async() => {
-        const response = await fetch('/api/database/houseinfo', {
-          method: 'POST',
-          body: JSON.stringify({address: `Омск, ${streetInput}, ${houseInput}`}),
-          headers: {
-          'Content-Type': 'application/json'
-          }
-        })
-        console.log('submitHandler fetch')
-        const [houseInfo] = await response.json()
-        console.log('submitHandler response')
-        setDataForRequest({
-          ...dataForRequest,
-          house: houseInfo,
-          tariff: ''
-        })
-        console.log('submitHandler done')
-      }
-      fullInfOfHouse()
+  const submitHandler = () => {
+    const fullInfOfHouse = async() => {
+      const response = await fetch('/api/database/houseinfo', {
+        method: 'POST',
+        body: JSON.stringify({address: `Омск, ${streetInput}, ${houseInput}`}),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      const [houseInfo] = await response.json()
+      setDataForRequest({
+        ...dataForRequest,
+        house: houseInfo,
+        tariff: ''
+      })
+    }
+    fullInfOfHouse()
   }
 
 
@@ -126,7 +122,14 @@ const sendRequest = async() => {
       token, userId, login, logout, isAuthenticated
     }}>
       <div className="App">
+        {
+          requestModalWindowShow && <RequestModalWindow 
+            requestModalWindowShow={requestModalWindowShow}
+            setRequestModalWindowShow={setRequestModalWindowShow}
+          /> 
+        }               
         <Router>
+        <Header />
           <Routes 
             listOfAllAddresses={listOfAllAddresses}
             allTariffs={allTariffs}
@@ -142,6 +145,7 @@ const sendRequest = async() => {
             sendRequest={sendRequest}
           />
         </Router>
+        <Footer />
       </div>
     </AuthContext.Provider>
   )
@@ -149,26 +153,14 @@ const sendRequest = async() => {
 /*
 todo
 
-Анимация от скрола как 
-В инпуте должно появляться ул. +7 и тд
-Направления сортировки для каждого столбца
-Убрать логику логина из апп
-Убрать запросы из мэйна
+Респонсив
+Валидация инпутов
+Маска инпутов
 Обработка ошибок
 Обработка ожидания загрузки
-Комментарии к коду
-Большще свойств тарифа (дополнительные опции и тд)
-Фильтры таблицы
-Кнопка скрола вверх
-Маска для номера
-
-Шрифт
 Изменить скролы в хинтах
-
-Анимация построчного добалениея таблицы
-Анимайия на кнопки
-Анимация на модальное окно
-Скролл вверх после самбита
+Добавить анимаций
+Заполнить пустоту в AvailableTariffPage под инпутами
 
 */
 export default App;

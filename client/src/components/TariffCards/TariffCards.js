@@ -1,4 +1,4 @@
-import  React, { useEffect } from 'react'
+import  React/*, { useEffect }*/ from 'react'
 import { TariffCard } from '../TariffCard/TariffCard'
 import './TariffCards.css'
 

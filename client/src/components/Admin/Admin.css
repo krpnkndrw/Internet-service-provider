@@ -6,6 +6,7 @@
 }
 #adminPlaceSideMenu{
     width: 300px;
+    padding: 10px;
 }
 #adminPlaceSideMenu ul {
     list-style-type: none;
@@ -18,7 +19,7 @@
 }
 #adminPlaceBody{
     width: 100%;
-    background-color: #f5f5f5;
+    background-color: var(--gray-light-color);
     padding: 10px;
     text-align: left;    
 }

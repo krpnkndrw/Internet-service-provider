@@ -1,2 +1,3 @@
 # Internet-service-provider
-My first MERN project
+MERN project
+JWT authentication 

@@ -103,7 +103,7 @@ export const AddressFinder = (props) => {
                     onClick={submitHandler}
                     disabled={props.addressFinderCondition !== 'waitingOfSubmit'}
                 >
-                    {addressSelected ? 'Изменить адрес': 'Подобрать тарифы'}
+                    {/*addressSelected ? 'Изменить адрес': */'Подобрать тарифы'}
                 </button>
             </Link>
         </div>       

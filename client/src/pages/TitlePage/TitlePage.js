@@ -21,7 +21,7 @@ export const TitlePage = (props) => {
                             Все тарифы 
                         </Link>
                         <Link to='/admin'> 
-                            Войти 
+                            Админ 
                         </Link>
                     </div>                  
                 </nav>

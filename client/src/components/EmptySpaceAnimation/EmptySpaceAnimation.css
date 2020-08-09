@@ -1,0 +1,32 @@
+#EmptySpaceAnimation { 
+    margin-top: 100px;
+    width: 400px;
+    height: 400px; 
+}  
+#EmptySpaceAnimation>div { 
+    position: relative; 
+    width: 100%; 
+    padding-bottom: 100%; 
+    overflow: hidden; 
+}  
+#EmptySpaceAnimation>div text { 
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+}
+#EmptySpaceAnimation>div svg { 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    animation-name: rotate;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes rotate {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0); }
+}
+  
+  

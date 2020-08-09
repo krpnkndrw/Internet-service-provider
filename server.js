@@ -21,7 +21,7 @@ const start = async() => {
       useUnifiedTopology: true,
     })
     console.log('Connected to MongoDB...')
-    //updateAddresses()
+    //updateAddresses() //функция изначального заполнения бд
     app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`))    
   } catch(e){
     console.log('Server error')

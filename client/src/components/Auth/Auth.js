@@ -51,7 +51,7 @@ export const Auth = () => {
         }
     }
     const ModChooser = (nextMod) => {
-        setMod(nextMod)        
+        setMod(nextMod)
     }
     
     return(

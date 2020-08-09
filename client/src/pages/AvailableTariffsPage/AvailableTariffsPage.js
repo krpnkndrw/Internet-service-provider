@@ -2,6 +2,7 @@ import  React, { useEffect, useState } from 'react'
 import { AddressFinder } from '../../components/AddressFinder/AddressFinder'
 import './AvailableTariffsPage.css'
 import { TariffCards } from '../../components/TariffCards/TariffCards'
+import { EmptySpaceAnimation } from '../../components/EmptySpaceAnimation/EmptySpaceAnimation'
 
 export const AvailableTariffsPage = (props) => {
     const [choosenTariffs, setChoosenTariffs] = useState([])
@@ -30,7 +31,7 @@ export const AvailableTariffsPage = (props) => {
             />
             {(choosenTariffs.length > 0)
                 ?<h2>Тарифы доступные по вашему адресу</h2>
-                :null
+                :<EmptySpaceAnimation />
             }
             <TariffCards 
                 allTariffs={choosenTariffs}

@@ -45,14 +45,12 @@ router.get('/allnotdonerequests', async(req, res) => {
 })
 // /api/database/deleterequest
 router.post('/deleterequest', async(req, res) => {
-    console.log(req.body)
     const allrequests = await InternetRequest.remove({ _id: req.body.id })
     res.send(allrequests)
 })
 // /api/database/updaterequest
 router.post('/updaterequest', async(req, res) => {
     const id = req.body.id
-    console.log(req.body)
     const updatedRequest = await InternetRequest.findOneAndUpdate({_id: id}, req.body.update)
     res.send(updatedRequest)
 })

@@ -1,4 +1,5 @@
-import  React, {useState, useEffect} from 'react';
+import  React, {useState, useEffect} from 'react'
+import { chooseProviderLogo } from '../chooseProviderLogo'
 import './AllTariffs.css'
 
 export const AllTariffs = (props) => {
@@ -29,12 +30,6 @@ export const AllTariffs = (props) => {
             </div>
         )  
         setTableOfTariffs(tableOfTariffs)  
-    }
-    const chooseProviderLogo = (provider) => {
-        if(provider === 'ДОМ.ru')       return <img src='http://localhost:3000/static/DOMru2.png' alt={provider}></img>
-        if(provider === 'Beeline')      return <img src='http://localhost:3000/static/Beeline.png' alt={provider}></img>
-        if(provider === 'МТС')          return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
-        if(provider === 'Ростелеком')   return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
     }
 
     const sortingByСolumn = (column) => {

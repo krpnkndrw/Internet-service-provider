@@ -1,4 +1,5 @@
-import  React from 'react';
+import  React from 'react'
+import { chooseProviderLogo } from '../chooseProviderLogo'
 import './TariffInfo.css'
 
 export const TariffInfo = (props) => {
@@ -16,12 +17,6 @@ export const TariffInfo = (props) => {
     const tvRouter = props.dataForRequest.tariff['ТВ-приставка']
     const tvRouterPrice = props.dataForRequest.tariff['Стоимость ТВ-приставки']
     
-    const chooseProviderLogo = (provider) => {
-        if(provider === 'ДОМ.ru') return <img src='http://localhost:3000/static/DOMru3.png' alt={provider}></img>
-        if(provider === 'Beeline') return <img src='http://localhost:3000/static/Beeline.png' alt={provider}></img>
-        if(provider === 'МТС') return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
-        if(provider === 'Ростелеком') return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
-    }
     const channelAndMinutesPostfix = (word, count) => {
         let lastNumber = +`${count}`.slice(-1);
         console.log(lastNumber)

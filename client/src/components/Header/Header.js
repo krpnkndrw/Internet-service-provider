@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
+import { pathToFiles } from '../pathToFilesFinder'
 import './Header.css';
 
 export const Header = () => {
@@ -12,7 +13,7 @@ export const Header = () => {
         <header>
             <div id='headerBackground'>
                 <video autoPlay muted loop>
-                    <source src='http://localhost:3000/static/office_1.webm' type="video/mp4"/>
+                    <source src={`${pathToFiles}office_1.webm`} type="video/mp4"/>
                 </video>
                 <div></div>
             </div>

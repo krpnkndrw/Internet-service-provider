@@ -1,6 +1,9 @@
-import  React, {useState, useEffect} from 'react';
+import  React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import { pathToFiles } from '../pathToFilesFinder'
 import './TariffsTable.css'
+import { chooseProviderLogo } from '../chooseProviderLogo'
+
 
 export const TableOfTariffs = (props) => {
 
@@ -16,7 +19,7 @@ export const TableOfTariffs = (props) => {
 
     const symbolReplace = (string) => {
         if(string === 'Безлимит'){
-            return <img id='infinitySymbol' src='http://localhost:3000/static/infinity_lighter.png' alt='infinitySymbol'/>
+            return <img id='infinitySymbol' src={`${pathToFiles}infinity_lighter.png`} alt='infinitySymbol'/>
         } else if(string === 0 || string === 'нет'){
             return <div className='dash'><p style={{'display': 'none'}}>{string}</p></div> 
         }
@@ -85,15 +88,6 @@ export const TableOfTariffs = (props) => {
             tariff: element
         })
     }
-
-    //Подстановка логотипа провайдера
-    const chooseProviderLogo = (provider) => {
-        if(provider === 'ДОМ.ru') return <img src='http://localhost:3000/static/DOMru2.png' alt={provider}></img>
-        if(provider === 'Beeline') return <img src='http://localhost:3000/static/Beeline.png' alt={provider}></img>
-        if(provider === 'МТС') return <img src='http://localhost:3000/static/mts.png' alt={provider}></img>
-        if(provider === 'Ростелеком') return <img src='http://localhost:3000/static/Rostelecom.png' alt={provider}></img>
-    }
-
     const mobileSort = (element) => {
         if (element === 'Безлимит') return 9999
         else if (element === 'нет') return 0

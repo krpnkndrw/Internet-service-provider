@@ -8,7 +8,7 @@
     "server": "nodemon server.js",
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
-    "client:biuld": "npm run biuld --prefix client",
+    "client:build": "npm run build --prefix client",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Karpenko Andrew <krpnkndrw@gmail.com>",

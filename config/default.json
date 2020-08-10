@@ -1,0 +1,5 @@
+{
+    "port": 5000,
+    "jwtSecret": "providerPage mern",
+    "mongoUri": "mongodb+srv://kuper781:de4781@cluster0-ehtxm.azure.mongodb.net/app?retryWrites=true&w=majority"
+}

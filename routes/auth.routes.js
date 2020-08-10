@@ -1,10 +1,9 @@
 let { Router } = require('express')
 const router = Router()
+const config = require('config')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-
-const jwtSecret = 'providerPage mern'
 
 //api/auth/register
 router.post('/register', async(req, res) => {
@@ -44,7 +43,7 @@ router.post('/login', async(req, res) => {
 
         const token = jwt.sign(
             { userId: user.id },
-            jwtSecret,
+            config.get('jwtSecret'),
             { expiresIn: '1h' }
         )
     

@@ -11,24 +11,31 @@ export const Auth = () => {
     const [form, setForm] = useState(initialForm)    
     const [mod, setMod] = useState('Login')
     const [errorMessage, setErrorMessage] = useState('')
+    const [successMessage, setSuccessMessage] = useState('')
 
     const inputChangeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
     }
-    useEffect( () => {
+    /*useEffect( () => {
         setForm(initialForm)
         setErrorMessage('')
-    }, [mod])    
+    }, [mod])   */ 
 
     const registerHandler = async(event) => {
         event.preventDefault()
-        await fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form)
-        })
+        try{
+            await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form)
+            })
+            ModChooser('Login')
+            setSuccessMessage('Вы успешно зарегистрировались!')
+        } catch(e) {
+            setErrorMessage(e)
+        }        
     }
 
     const loginHandler = async(event) => {
@@ -51,6 +58,8 @@ export const Auth = () => {
         }
     }
     const ModChooser = (nextMod) => {
+        setForm(initialForm)
+        setErrorMessage('')
         setMod(nextMod)
     }
     
@@ -60,6 +69,7 @@ export const Auth = () => {
                 <button onClick={() => ModChooser('Login')} className={(mod==='Login')?'ModActive':null}>Вход</button>
                 <button onClick={() => ModChooser('Register')} className={(mod==='Register')?'ModActive':null}>Регистрация</button> 
             </div>
+            <p className='successMessage'>{successMessage}</p>
             <form>
                 <input
                   placeholder="Логин"

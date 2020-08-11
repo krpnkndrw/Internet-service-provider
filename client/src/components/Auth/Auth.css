@@ -68,3 +68,8 @@
     transition: 1s;
     margin-top: 10px;
 }
+.successMessage{
+    height: 15px;
+    transition: 1s;
+    margin-top: 20px;
+}
